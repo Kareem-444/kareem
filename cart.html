@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - My Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">My Store</div>
+        <div class="nav-toggle" onclick="toggleMenu()">&#9776;</div>
+        <ul id="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="cart" style="padding: 2rem;">
+        <h2 style="text-align: center; margin-bottom: 1rem;">Your Cart</h2>
+        <div id="cart-items" style="background: var(--white); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;"></div>
+        <h3 id="cart-total" style="text-align: right;">Total: $0.00</h3>
+        <a href="checkout.html" class="btn" style="display: block; text-align: center; max-width: 200px; margin: 0 auto;">Proceed to Checkout</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 My Store. All rights reserved. | <a href="contact.html">Contact Us</a></p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        function displayCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            cartItems.innerHTML = '';
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                cartItems.innerHTML += `
+                    <div style="display: flex; justify-content: space-between; padding: 0.5rem; border-bottom: 1px solid #ddd;">
+                        <span>${item.name}</span>
+                        <span>$${item.price.toFixed(2)}</span>
+                        <button onclick="removeFromCart(${index})" style="background: none; border: none; color: red; cursor: pointer;">Remove</button>
+                    </div>
+                `;
+            });
+
+           cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+        }
+
+        displayCart();
+    </script>
+</body>
+</html>

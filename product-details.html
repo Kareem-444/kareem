@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - My Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">My Store</div>
+        <div class="nav-toggle" onclick="toggleMenu()">&#9776;</div>
+        <ul id="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="product-details" style="padding: 2rem; display: flex; flex-wrap: wrap; gap: 2rem; animation: fadeIn 1s ease-in;">
+        <img id="product-image" src="" alt="Product" style="width: 100%; max-width: 400px; border-radius: 10px;">
+        <div style="flex: 1;">
+            <h2 id="product-name"></h2>
+            <p id="product-price" style="font-size: 1.2rem; color: var(--primary-blue);"></p>
+            <p id="product-description" style="margin: 1rem 0;"></p>
+            <button class="btn" onclick="addToCart()">Add to Cart</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 My Store. All rights reserved. | <a href="contact.html">Contact Us</a></p>
+    </footer>
+
+    <script>
+        // قاعدة بيانات بسيطة للمنتجات
+        const products = [
+            { id: 1, name: 'Smartphone', price: 299.99, description: 'High-quality smartphone with advanced features.', image: '../images/smrtphonne.jpg' },
+            { id: 2, name: 'T-Shirt', price: 19.99, description: 'Comfortable cotton T-shirt in various colors.', image: '../images/tishrt.jpg' }
+        ];
+
+        // جلب معرف المنتج من URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get('id'));
+
+        // عرض تفاصيل المنتج
+        const product = products.find(p => p.id === productId);
+        if (product) {
+            document.getElementById('product-image').src = product.image;
+            document.getElementById('product-name').textContent = product.name;
+           document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}`;
+            document.getElementById('product-description').textContent = product.description;
+        } else {
+            document.querySelector('.product-details').innerHTML = '<p>Product not found.</p>';
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        function addToCart() {
+            if (product) {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart.push({ name: product.name, price: product.price });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                window.location.href = 'cart.html';
+            }
+        }
+    </script>
+</body>
+</html>

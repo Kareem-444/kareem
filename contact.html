@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - My Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">My Store</div>
+        <div class="nav-toggle" onclick="toggleMenu()">&#9776;</div>
+        <ul id="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="contact" style="padding: 2rem; max-width: 600px; margin: 0 auto;">
+        <h2 style="text-align: center; margin-bottom: 1rem;">Contact Us</h2>
+        <form id="contact-form" style="background: var(--white); padding: 1rem; border-radius: 10px;">
+            <label for="name">Name</label>
+            <input type="text" id="name" required style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 5px;">
+            <label for="email">Email</label>
+            <input type="email" id="email" required style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 5px;">
+            <label for="message">Message</label>
+            <textarea id="message" required style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 5px; min-height: 100px;"></textarea>
+            <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 My Store. All rights reserved. | <a href="contact.html">Contact Us</a></p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            if (!email.includes('@')) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            alert('Message sent successfully!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

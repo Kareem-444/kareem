@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - My Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">My Store</div>
+        <div class="nav-toggle" onclick="toggleMenu()">&#9776;</div>
+        <ul id="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="products" style="padding: 2rem;">
+        <h2 style="text-align: center; margin-bottom: 1rem;">Our Products</h2>
+        <div class="filter" style="text-align: center; margin-bottom: 2rem;">
+            <button class="btn" onclick="filterProducts('all')">All</button>
+            <button class="btn" onclick="filterProducts('electronics')">Electronics</button>
+            <button class="btn" onclick="filterProducts('clothing')">Clothing</button>
+        </div>
+       <div class="product-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+    <div class="product-card" data-category="electronics" style="background: var(--white); padding: 1rem; border-radius: 10px; text-align: center; animation: fadeIn 1s ease-in;">
+        <img src="../images/smrtphonne.jpg" alt="Smartphone" style="width: 100%; border-radius: 5px;">
+        <h3>Smartphone</h3>
+        <p>$299.99</p>
+        <a href="product-details.html?id=1" class="btn">View Details</a>
+    </div>
+    <div class="product-card" data-category="clothing" style="background: var(--white); padding: 1rem; border-radius: 10px; text-align: center; animation: fadeIn 1s ease-in;">
+        <img src="../images/tishrt.jpg" alt="T-Shirt" style="width: 100%; border-radius: 5px;">
+        <h3>T-Shirt</h3>
+        <p>$19.99</p>
+        <a href="product-details.html?id=2" class="btn">View Details</a>
+    </div>
+</div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 My Store. All rights reserved. | <a href="contact.html">Contact Us</a></p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product-card');
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

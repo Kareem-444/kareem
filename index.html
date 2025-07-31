@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - My Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">My Store</div>
+        <div class="nav-toggle" onclick="toggleMenu()">&#9776;</div>
+        <ul id="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" style="text-align: center; padding: 3rem; background-color: var(--light-blue); animation: fadeIn 1s ease-in;">
+        <h1>Welcome to My Store</h1>
+        <p>Discover our exclusive collection of products!</p>
+        <button class="btn" onclick="showMessage()">Shop Now</button>
+    </section>
+
+    <section class="slider" style="padding: 2rem; text-align: center;">
+        <h2>Special Offers</h2>
+        <div class="slides" style="display: flex; overflow: hidden;">
+            <div class="slide" style="min-width: 100%; transition: transform 0.5s ease;">
+                <h3>Offer 1: 20% Off!</h3>
+                <p>Shop now and save big!</p>
+            </div>
+            <div class="slide" style="min-width: 100%; transition: transform 0.5s ease;">
+                <h3>Offer 2: Free Shipping!</h3>
+                <p>On orders over $50.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-products" style="padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+        <h2 style="grid-column: 1 / -1; text-align: center;">Featured Products</h2>
+        <div class="product-card" style="background: var(--white); padding: 1rem; border-radius: 10px; text-align: center; animation: fadeIn 1s ease-in;">
+            <img src="../images/i dont wanna do this any more.jpg" alt="Product 1" style="width: 100%; border-radius: 5px;">
+            <h3>Product 1</h3>
+            <p>$29.99</p>
+            <button class="btn" onclick="addToCart('Product 1', 29.99)">Add to Cart</button>
+        </div>
+        <div class="product-card" style="background: var(--white); padding: 1rem; border-radius: 10px; text-align: center; animation: fadeIn 1s ease-in;">
+            <img src="../images/sad.jpg" alt="Product 2" style="width: 100%; border-radius: 5px;">
+            <h3>Product 2</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Product 2', 39.99)">Add to Cart</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 My Store. All rights reserved. | <a href="contact.html">Contact Us</a></p>
+    </footer>
+
+    <script>
+        // فتح/إغلاق القائمة في الشاشات الصغيرة
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        function showMessage() {
+        window.location.href = 'products.html';
+}
+
+        // إضافة إلى السلة
+       function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push({ name, price });
+    localStorage.setItem('cart', JSON.stringify(cart));
+    window.location.href = 'cart.html';
+}
+
+        // سلايدر العروض
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        function showSlides() {
+            slides.forEach((slide, index) => {
+               slide.style.transform = `translateX(-${slideIndex * 100}%)`;
+            });
+            slideIndex = (slideIndex + 1) % slides.length;
+        }
+        setInterval(showSlides, 3000);
+    </script>
+</body>
+</html>
